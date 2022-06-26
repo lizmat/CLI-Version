@@ -1,0 +1,11 @@
+use Test;
+
+{ # needs to be in scope to hide from normal MAIN processing
+    use CLI::Version $?DISTRIBUTION, proto sub MAIN(|) {*}
+}
+
+plan 1;
+
+pass "still alive";
+
+# vim: expandtab shiftwidth=4
