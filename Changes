@@ -2,5 +2,8 @@ Revision history for CLI-Version
 
 {{$NEXT}}
 
+0.0.2  2022-06-28T22:03:39+02:00
+    - Added optional --verbose option to also show description
+
 0.0.1  2022-06-26T11:38:54+02:00
     - Initial version

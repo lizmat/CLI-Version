@@ -25,10 +25,18 @@ For instance, in the [App::Rak](https://raku.land/zef:lizmat/App::Rak) distribut
 
 ```bash
     $ rak -V
-    rak - based on App::Rak 0.0.2, running Raku 6.d on Rakudo 2022.06
+    rak - based on App::Rak 0.0.3, running Raku 6.d on Rakudo 2022.06.
 ```
 
 If the candidate is triggered, it will exit with the default value for `exit` (which is usually **0**).
+
+If you would also like to see the description of the module, you can add `--verbose` as an argument: then you get something like:
+
+```bash
+    $ rak -V --verbose
+    rak - a CLI for searching strings in files.
+    Based on App::Rak 0.0.3, running Raku 6.d with Rakudo 2022.06.27.
+```
 
 IMPLEMENTATION NOTES
 ====================

@@ -2,11 +2,13 @@ my constant %export = ();
 
 sub EXPORT($DISTRIBUTION, &proto) {
     &proto.add_dispatchee:
-    my multi sub MAIN(:V(:$version)!) {
+    my multi sub MAIN(:V(:$version)!, :$verbose) {
         my %meta     := $DISTRIBUTION.meta;
         my $compiler := Compiler.new;
         say $*PROGRAM.basename
-          ~ ' - based on '
+          ~ ' - '
+          ~ ($verbose ?? "%meta<description>.\nB" !! 'b')
+          ~ 'ased on '
           ~ %meta<name>
           ~ ' '
           ~ %meta<ver>
@@ -14,10 +16,11 @@ sub EXPORT($DISTRIBUTION, &proto) {
           ~ $*RAKU.name
           ~ ' '
           ~ $*RAKU.version
-          ~ ' on '
+          ~ ' with '
           ~ $compiler.name.tc
           ~ ' '
           ~ $compiler.version.Str.subst(/ '.' g .+/)
+          ~ '.'
         ;
         exit;
     }
@@ -56,12 +59,23 @@ result in something like:
 =begin code :lang<bash>
 
     $ rak -V
-    rak - based on App::Rak 0.0.2, running Raku 6.d on Rakudo 2022.06
+    rak - based on App::Rak 0.0.3, running Raku 6.d on Rakudo 2022.06.
 
 =end code
 
 If the candidate is triggered, it will exit with the default value for
 C<exit> (which is usually B<0>).
+
+If you would also like to see the description of the module, you can add
+C<--verbose> as an argument: then you get something like:
+
+=begin code :lang<bash>
+
+    $ rak -V --verbose
+    rak - a CLI for searching strings in files.
+    Based on App::Rak 0.0.3, running Raku 6.d with Rakudo 2022.06.27.
+
+=end code
 
 =head1 IMPLEMENTATION NOTES
 
