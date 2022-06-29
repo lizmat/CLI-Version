@@ -7,8 +7,8 @@ sub EXPORT($DISTRIBUTION, &proto) {
         my $compiler := Compiler.new;
         say $*PROGRAM.basename
           ~ ' - '
-          ~ ($verbose ?? "%meta<description>.\nB" !! 'b')
-          ~ 'ased on '
+          ~ ($verbose ?? "%meta<description>.\nP" !! 'p')
+          ~ 'rovided by '
           ~ %meta<name>
           ~ ' '
           ~ %meta<ver>
@@ -59,7 +59,7 @@ result in something like:
 =begin code :lang<bash>
 
     $ rak -V
-    rak - based on App::Rak 0.0.3, running Raku 6.d on Rakudo 2022.06.
+    rak - provided by App::Rak 0.0.3, running Raku 6.d on Rakudo 2022.06.
 
 =end code
 
@@ -73,7 +73,7 @@ C<--verbose> as an argument: then you get something like:
 
     $ rak -V --verbose
     rak - a CLI for searching strings in files.
-    Based on App::Rak 0.0.3, running Raku 6.d with Rakudo 2022.06.27.
+    Provided by App::Rak 0.0.3, running Raku 6.d with Rakudo 2022.06.27.
 
 =end code
 
