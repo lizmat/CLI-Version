@@ -14,6 +14,9 @@ use CLI::Version $?DISTRIBUTION, &MAIN;
 
 # alternately:
 use CLI::Version $?DISTRIBUTION, proto sub MAIN(|) {*}
+
+# only allow --version
+use CLI::Version $?DISTRIBUTION, proto sub MAIN(|) {*}, "long-only";
 ```
 
 DESCRIPTION
@@ -37,6 +40,8 @@ If you would also like to see the description of the module, you can add `--verb
     rak - a CLI for searching strings in files.
     Provided by App::Rak 0.0.3, running Raku 6.d with Rakudo 2022.06.27.
 ```
+
+By specifying a true value as the 3rd argument in the `use` statement, will cause only `--version` to trigger the candidate.
 
 IMPLEMENTATION NOTES
 ====================

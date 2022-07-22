@@ -1,8 +1,5 @@
-my constant %export = ();
-
-sub EXPORT($DISTRIBUTION, &proto) {
-    &proto.add_dispatchee:
-    my multi sub MAIN(:V(:$version)!, :$verbose) {
+sub EXPORT($DISTRIBUTION, &proto, $long-only = "") {
+    my sub doit($version, $verbose) {
         my %meta     := $DISTRIBUTION.meta;
         my $compiler := Compiler.new;
         say $*PROGRAM.basename
@@ -25,7 +22,15 @@ sub EXPORT($DISTRIBUTION, &proto) {
         exit;
     }
 
-    %export
+    &proto.add_dispatchee: $long-only
+      ?? my multi sub MAIN(:$version!, :$verbose) {
+             doit($version, $verbose)
+         }
+      !! my multi sub MAIN(:V(:$version)!, :$verbose) {
+             doit($version, $verbose)
+         }
+
+    BEGIN Map.new
 }
 
 =begin pod
@@ -43,6 +48,9 @@ use CLI::Version $?DISTRIBUTION, &MAIN;
 
 # alternately:
 use CLI::Version $?DISTRIBUTION, proto sub MAIN(|) {*}
+
+# only allow --version
+use CLI::Version $?DISTRIBUTION, proto sub MAIN(|) {*}, "long-only";
 
 =end code
 
@@ -76,6 +84,9 @@ C<--verbose> as an argument: then you get something like:
     Provided by App::Rak 0.0.3, running Raku 6.d with Rakudo 2022.06.27.
 
 =end code
+
+By specifying a true value as the 3rd argument in the C<use>
+statement, will cause only C<--version> to trigger the candidate.
 
 =head1 IMPLEMENTATION NOTES
 
