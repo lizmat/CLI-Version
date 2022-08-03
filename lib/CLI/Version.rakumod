@@ -1,6 +1,28 @@
-sub EXPORT($DISTRIBUTION, &proto, $long-only = "") {
+my sub meh(str $message) {
+    note "CLI::Version: $message.";
+    exit 1;
+}
+
+multi sub EXPORT() {
+    meh q/must specify '$?DISTRIBUTION, &MAIN' as arguments/;
+}
+multi sub EXPORT($first) {
+    meh Callable.ACCEPTS($first) && $first.name eq 'MAIN'
+      ?? 'must specify $?DISTRIBUTION as the first argument'
+      !! !$first.can('meta')
+        ?? "first argument must provide a 'meta' method"
+        !! 'must also specify the &MAIN sub as the second argument';
+}
+multi sub EXPORT(\DISTRIBUTION, &proto, $long-only = "") {
+    meh "script '$*PROGRAM-NAME' does not appear to be part of a distribution"
+      if DISTRIBUTION =:= Nil;
+    meh "first argument must provide a 'meta' method"
+      if DISTRIBUTION.can('meta') == 0;
+    meh "second argument must be the '&MAIN' sub"
+      unless &proto.name eq 'MAIN';
+
     my sub doit($version, $verbose) {
-        my %meta     := $DISTRIBUTION.meta;
+        my %meta     := DISTRIBUTION.meta;
         my $compiler := Compiler.new;
         say $*PROGRAM.basename
           ~ ' - '
@@ -23,14 +45,14 @@ sub EXPORT($DISTRIBUTION, &proto, $long-only = "") {
     }
 
     &proto.add_dispatchee: $long-only
-      ?? my multi sub MAIN(:$version!, :$verbose) {
+      ?? my multi sub MAIN(Bool:D :$version!, Bool :$verbose) {
              doit($version, $verbose)
          }
-      !! my multi sub MAIN(:V(:$version)!, :$verbose) {
+      !! my multi sub MAIN(Bool:D :V(:$version)!, Bool :$verbose) {
              doit($version, $verbose)
          }
 
-    BEGIN Map.new
+    BEGIN Map.new   # doesn't actually export anything
 }
 
 =begin pod

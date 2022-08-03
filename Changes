@@ -2,6 +2,10 @@ Revision history for CLI-Version
 
 {{$NEXT}}
 
+0.0.5  2022-08-03T16:52:09+02:00
+    - Add some better error checking
+    - Report arguments as Bools for better default help production
+
 0.0.4  2022-07-22T16:40:51+02:00
     - Add option to only allow --version
 

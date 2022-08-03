@@ -1,7 +1,9 @@
 use Test;
 
 { # needs to be in scope to hide from normal MAIN processing
-    use CLI::Version $?DISTRIBUTION, proto sub MAIN(|) {*}
+    # Fake a $?DISTRIBUTION object
+    class Distribution { method meta() { Map.new } }
+    use CLI::Version Distribution, proto sub MAIN(|) {*}
 }
 
 plan 1;
