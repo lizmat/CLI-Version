@@ -7,7 +7,7 @@ multi sub EXPORT() {
     meh q/must specify '$?DISTRIBUTION, &MAIN' as arguments/;
 }
 multi sub EXPORT($first) {
-    meh Callable.ACCEPTS($first) && $first.name eq 'MAIN'
+    meh Callable.ACCEPTS($first)
       ?? 'must specify $?DISTRIBUTION as the first argument'
       !! !$first.can('meta')
         ?? "first argument must provide a 'meta' method"
@@ -18,8 +18,6 @@ multi sub EXPORT(\DISTRIBUTION, &proto, $long-only = "") {
       if DISTRIBUTION =:= Nil;
     meh "first argument must provide a 'meta' method"
       if DISTRIBUTION.can('meta') == 0;
-    meh "second argument must be the '&MAIN' sub"
-      unless &proto.name eq 'MAIN';
 
     my sub doit($version, $verbose) {
         my %meta     := DISTRIBUTION.meta;

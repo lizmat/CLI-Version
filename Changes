@@ -2,6 +2,9 @@ Revision history for CLI-Version
 
 {{$NEXT}}
 
+0.0.6  2022-08-04T15:27:25+02:00
+    - Be more lenient on the name of the sub specified
+
 0.0.5  2022-08-03T16:52:09+02:00
     - Add some better error checking
     - Report arguments as Bools for better default help production
