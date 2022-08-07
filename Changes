@@ -2,6 +2,11 @@ Revision history for CLI-Version
 
 {{$NEXT}}
 
+0.0.7  2022-08-07T23:02:13+02:00
+    - Don't complain about lack of distribution information.  Just
+      don't add any dispatchees in that case.  Should fix issues
+      with processing pod of modules using this module.
+
 0.0.6  2022-08-04T15:27:25+02:00
     - Be more lenient on the name of the sub specified
 

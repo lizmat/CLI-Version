@@ -14,41 +14,41 @@ multi sub EXPORT($first) {
         !! 'must also specify the &MAIN sub as the second argument';
 }
 multi sub EXPORT(\DISTRIBUTION, &proto, $long-only = "") {
-    meh "script '$*PROGRAM-NAME' does not appear to be part of a distribution"
-      if DISTRIBUTION =:= Nil;
-    meh "first argument must provide a 'meta' method"
-      if DISTRIBUTION.can('meta') == 0;
+    unless DISTRIBUTION =:= Nil {
+        meh "first argument must provide a 'meta' method"
+          if DISTRIBUTION.can('meta') == 0;
 
-    my sub doit($version, $verbose) {
-        my %meta     := DISTRIBUTION.meta;
-        my $compiler := Compiler.new;
-        say $*PROGRAM.basename
-          ~ ' - '
-          ~ ($verbose ?? "%meta<description>.\nP" !! 'p')
-          ~ 'rovided by '
-          ~ %meta<name>
-          ~ ' '
-          ~ %meta<ver>
-          ~ ', running '
-          ~ $*RAKU.name
-          ~ ' '
-          ~ $*RAKU.version
-          ~ ' with '
-          ~ $compiler.name.tc
-          ~ ' '
-          ~ $compiler.version.Str.subst(/ '.' g .+/)
-          ~ '.'
-        ;
-        exit;
+        my sub doit($version, $verbose) {
+            my %meta     := DISTRIBUTION.meta;
+            my $compiler := Compiler.new;
+            say $*PROGRAM.basename
+              ~ ' - '
+              ~ ($verbose ?? "%meta<description>.\nP" !! 'p')
+              ~ 'rovided by '
+              ~ %meta<name>
+              ~ ' '
+              ~ %meta<ver>
+              ~ ', running '
+              ~ $*RAKU.name
+              ~ ' '
+              ~ $*RAKU.version
+              ~ ' with '
+              ~ $compiler.name.tc
+              ~ ' '
+              ~ $compiler.version.Str.subst(/ '.' g .+/)
+              ~ '.'
+            ;
+            exit;
+        }
+
+        &proto.add_dispatchee: $long-only
+          ?? my multi sub MAIN(Bool:D :$version!, Bool :$verbose) {
+                 doit($version, $verbose)
+             }
+          !! my multi sub MAIN(Bool:D :V(:$version)!, Bool :$verbose) {
+                 doit($version, $verbose)
+             }
     }
-
-    &proto.add_dispatchee: $long-only
-      ?? my multi sub MAIN(Bool:D :$version!, Bool :$verbose) {
-             doit($version, $verbose)
-         }
-      !! my multi sub MAIN(Bool:D :V(:$version)!, Bool :$verbose) {
-             doit($version, $verbose)
-         }
 
     BEGIN Map.new   # doesn't actually export anything
 }
