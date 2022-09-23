@@ -2,6 +2,10 @@ Revision history for CLI-Version
 
 {{$NEXT}}
 
+0.0.8  2022-09-24T00:23:44+02:00
+    - Make loading more resilient against an improper $?DISTRIBUTION
+    - Remove typing in MAIN candidate for more flexibility
+
 0.0.7  2022-08-07T23:02:13+02:00
     - Don't complain about lack of distribution information.  Just
       don't add any dispatchees in that case.  Should fix issues
