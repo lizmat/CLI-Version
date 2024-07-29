@@ -1,6 +1,10 @@
 Revision history for CLI-Version
 
 {{$NEXT}}
+    - Update version info in examples
+    - Update copyright year
+    - Add separate CI badges for each OS
+    - Add sponsor button
 
 0.0.8  2022-09-24T00:23:44+02:00
     - Make loading more resilient against an improper $?DISTRIBUTION

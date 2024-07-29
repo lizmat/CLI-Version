@@ -81,8 +81,8 @@ result in something like:
 
 =begin code :lang<bash>
 
-    $ rak -V
-    rak - provided by App::Rak 0.0.3, running Raku 6.d on Rakudo 2022.06.
+$ rak --version
+rak - provided by App::Rak 0.3.2, running Raku 6.d with Rakudo 2024.07.
 
 =end code
 
@@ -94,9 +94,9 @@ C<--verbose> as an argument: then you get something like:
 
 =begin code :lang<bash>
 
-    $ rak -V --verbose
-    rak - a CLI for searching strings in files.
-    Provided by App::Rak 0.0.3, running Raku 6.d with Rakudo 2022.06.27.
+$ rak --version --verbose
+rak - 21st century grep / find / ack / ag / rg on steroids.
+Provided by App::Rak 0.3.2, running Raku 6.d with Rakudo 2024.07.
 
 =end code
 
@@ -123,7 +123,7 @@ deal to me!
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2022 Elizabeth Mattijsen
+Copyright 2022, 2024 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
