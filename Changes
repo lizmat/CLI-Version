@@ -1,6 +1,8 @@
 Revision history for CLI-Version
 
 {{$NEXT}}
+
+0.0.9  2024-07-29T14:44:46+02:00
     - Update version info in examples
     - Update copyright year
     - Add separate CI badges for each OS
