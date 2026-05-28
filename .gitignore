@@ -1,3 +1,4 @@
 .precomp/
 /CLI-Version-*
 /releases/
+*.rakucov

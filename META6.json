@@ -3,25 +3,23 @@
   "authors": [
     "Elizabeth Mattijsen"
   ],
-  "build-depends": [
-  ],
   "depends": [
   ],
   "description": "add -V / --version parameters to your script",
   "license": "Artistic-2.0",
   "name": "CLI::Version",
-  "perl": "6.d",
   "provides": {
     "CLI::Version": "lib/CLI/Version.rakumod"
   },
-  "resources": [
-  ],
-  "source-url": "https://github.com/lizmat/CLI-Version.git",
+  "raku": "6.d",
+  "support": {
+    "bugtracker": "https://github.com/lizmat/CLI-Version/issues",
+    "email": "liz@raku.rocks",
+    "source": "https://github.com/lizmat/CLI-Version.git"
+  },
   "tags": [
     "CLI",
     "VERSION"
-  ],
-  "test-depends": [
   ],
   "version": "0.0.9"
 }
