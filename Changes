@@ -1,6 +1,8 @@
 Revision history for CLI-Version
 
 {{$NEXT}}
+
+0.0.10  2026-05-28T14:21:06+02:00
     - Modernize META
     - Update copyright year
 
